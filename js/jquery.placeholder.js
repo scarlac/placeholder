@@ -12,6 +12,10 @@
 	// Return if native support is available.
 	if ("placeholder" in document.createElement("input")) return;
 
+	var settings = {
+		'placeholder_class': 'placeholder'
+	};
+
 	$(document).ready(function(){
 		$(':input[placeholder]').not(':password').each(function() {
 			setupPlaceholder($(this));
@@ -33,16 +37,16 @@
 		setPlaceholderOrFlagChanged(input, placeholderText);
 		input.focus(function(e) {
 			if (input.data('changed') === true) return;
-			if (input.val() === placeholderText) input.val('');
+			if (input.val() === placeholderText) input.val('').removeClass(settings.placeholder_class);
 		}).blur(function(e) {
-			if (input.val() === '') input.val(placeholderText); 
+			if (input.val() === '') input.val(placeholderText).addClass(settings.placeholder_class); 
 		}).change(function(e) {
 			input.data('changed', input.val() !== '');
 		});
 	}
 
 	function setPlaceholderOrFlagChanged(input, text) {
-		(input.val() === '') ? input.val(text) : input.data('changed', true);
+		(input.val() === '') ? input.val(text).addClass(settings.placeholder_class) : input.data('changed', true);
 	}
 
 	function setupPasswords(input) {
@@ -68,14 +72,15 @@
 			placeholder: input.attr('placeholder'),
 			value: input.attr('placeholder'),
 			id: input.attr('id'),
-			readonly: true
+			readonly: true,
+			'class': settings.placeholder_class
 		}).addClass(input.attr('class'));
 	}
 
 	function clearPlaceholdersBeforeSubmit(form) {
 		form.find(':input[placeholder]').each(function() {
 			if ($(this).data('changed') === true) return;
-			if ($(this).val() === $(this).attr('placeholder')) $(this).val('');
+			if ($(this).val() === $(this).attr('placeholder')) $(this).val('').removeClass(settings.placeholder_class);
 		});
 	}
 })(jQuery);

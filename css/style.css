@@ -72,3 +72,10 @@ This is the best bit!
 	-webkit-box-shadow:0 0 5px #0a0, 0 0 5px rgba(0,0,0,0.25) inset;
 	box-shadow:0 0 5px #0a0, 0 0 5px rgba(0,0,0,0.25) inset;
 }
+
+/* Native placeholder support will usually fade the placeholder text,
+ * so change the properties of this selector to create a similar effect on older browsers */
+input.placeholder,
+textarea.placeholder {
+	color: #ccc;
+}
