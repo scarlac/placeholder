@@ -7,6 +7,7 @@
 	 * Licensed under the Apache License 2.0
 	 *
 	 * Author: Dan Bentley [github.com/danbentley]
+	 * Fork by: Seph Soliman [seph.dk]
 	 */
 
 	// Return if native support is available.
